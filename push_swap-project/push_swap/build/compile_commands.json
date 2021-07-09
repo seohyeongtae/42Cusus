@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build",
+  "command": "/usr/bin/clang   -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -o CMakeFiles/push_swap.dir/make_temstack.c.o -c /Users/hyseo/hyseo42cursus/push_swap-project/push_swap/make_temstack.c",
+  "file": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/make_temstack.c"
+},
+{
+  "directory": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build",
+  "command": "/usr/bin/clang   -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -o CMakeFiles/push_swap.dir/push_swap.c.o -c /Users/hyseo/hyseo42cursus/push_swap-project/push_swap/push_swap.c",
+  "file": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/push_swap.c"
+},
+{
+  "directory": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build",
+  "command": "/usr/bin/clang   -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -o CMakeFiles/push_swap.dir/setting_stack.c.o -c /Users/hyseo/hyseo42cursus/push_swap-project/push_swap/setting_stack.c",
+  "file": "/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/setting_stack.c"
+}
+]
