@@ -1,5 +1,4 @@
-/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build/CMakeFiles/rebuild_cache.dir
-/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build/CMakeFiles/edit_cache.dir
-/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build/CMakeFiles/package_source.dir
-/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build/CMakeFiles/package.dir
-/Users/hyseo/hyseo42cursus/push_swap-project/push_swap/build/CMakeFiles/push_swap.dir
+C:/Users/seo/Desktop/TIL/42Cusus/push_swap-project/push_swap/build/CMakeFiles/push_swap.dir
+C:/Users/seo/Desktop/TIL/42Cusus/push_swap-project/push_swap/build/CMakeFiles/PACKAGE.dir
+C:/Users/seo/Desktop/TIL/42Cusus/push_swap-project/push_swap/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/seo/Desktop/TIL/42Cusus/push_swap-project/push_swap/build/CMakeFiles/ZERO_CHECK.dir

@@ -156,7 +156,7 @@ t_stack	*run_rrb(t_stack *bstack)
 
 	bstack->front = final_stack;
 
-	write(1, "rra\n", 4);
+	write(1, "rrb\n", 4);
 	return (final_stack);
 }
 
@@ -484,22 +484,6 @@ t_stack	*start_sort(t_stack *astack, t_stack *bstack, int pivot, t_stack *tem)
 	while (tem->next)
 		tem = tem->next;
 	f_num = tem->num;
-	
-	// a = astack;
-	// while (a)
-	// {
-	// 	printf("start sort aaaaa = %d\n", a->num);
-	// 	a = a->next;
-	// }
-	// b = bstack;
-	// printf("\n");
-	// while (b)
-	// {
-	// 	printf("start sort bbbbb = %d\n", b->num);
-	// 	b = b->next;
-	// }
-
-
 	if (!check_sort(astack, bstack, pivot))
 	{
 		astack = check_pp(astack, bstack, pivot, f_num);
@@ -510,7 +494,6 @@ t_stack	*start_sort(t_stack *astack, t_stack *bstack, int pivot, t_stack *tem)
 		astack = end_sort(astack, bstack);
 		return (astack);	
 	}
-	// end sort에서 리스트 제일 앞부분을 가르키도록 확인
 	return (astack);
 }
 
@@ -540,7 +523,6 @@ int	main(int argc, char *argv[])
 	bstack = set_stack(0, 0);
 	while (argv[++pivot])
 		setting_stack(temstack, argv[pivot], pivot, astack);
-	
 	if (argc <= 3)
 		simple_check_sort(astack);
 	else 
@@ -567,13 +549,21 @@ int	main(int argc, char *argv[])
 	// free_stack(temstack, astack, bstack);
 
 	
-	// while (astack->front)
-	// 	astack = astack->front;
-	// while (astack)
-	// 	{
-	// 		printf("final astack======== %d\n", astack->num);
-	// 		astack = astack->next;
-	// 	}
+	while (astack->front)
+		astack = astack->front;
+	while (astack)
+		{
+			printf("final astack======== %d\n", astack->num);
+			astack = astack->next;
+		}
+
+	while (bstack->front)
+		bstack = bstack->front;
+	while (bstack)
+		{
+			printf("final bstack======== %d\n", bstack->num);
+			bstack = bstack->next;
+		}
 	
 	// // printf("======== %d\n", astack->num);
 	// // astack = astack->next;

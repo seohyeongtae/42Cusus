@@ -91,19 +91,19 @@ char	make_firststack(int factor, t_stack *temstack)
 	return ('1');
 }
 
-int	find_pivot_a(int argc, t_stack *temstack)
+int	find_pivot_min(int argc, t_stack *temstack)
 {
 	int	pivot;
 	int i;
 
 	pivot = 0;
 	i = 0;
-	while (temstack->next)
-		temstack = temstack->next;
-	while (i++ < argc)
+	while (temstack->front)
+		temstack = temstack->front;
+	while (++i < argc / 2)
 	{
-		if (temstack->front)
-			temstack = temstack->front;
+		if (temstack->next)
+			temstack = temstack->next;
 	}
 	pivot = temstack->num;
 	return (pivot);
