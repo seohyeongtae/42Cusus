@@ -46,5 +46,7 @@ char	make_astack(int factor, t_stack *astack);
 
 t_stack	*check_pp(t_stack *astack, t_stack *bstack, int count);
 t_stack *check_b(t_stack *astack, t_stack *bstack, int count);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

@@ -696,19 +696,52 @@ t_stack *simple_check_sort_five(t_stack *astack, t_stack *bstack, t_stack *tem, 
 	return (astack);
 }
 
+char	**make_argv(char **argv, int argc)
+{
+	char	*num;
+	int		count;
+	char	**final_num;
+
+	num = (char *)malloc(sizeof(char) * 2);
+	num[0] = ' ';
+	num[1] = '\0';
+	count = 1;
+	while (argv[count])
+	{
+		num = ft_strjoin(num, argv[count]);
+		num = ft_strjoin(num, " ");
+		count++;
+	}
+	final_num = ft_split(num, ' ');
+	free(num);
+	return (final_num);
+}
+
+int		num_len(char **num)
+{
+	int	count;
+	count = 0;
+	while(*(num + count))
+		count++;
+	return (count);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack		*temstack;
 	int			check;
 	t_stack		*astack;
 	t_stack		*bstack;
+	char		**num;
 
-	check = 0;
+	check = -1;
 	temstack = set_stack(0);
 	astack = set_stack(0);
 	bstack = set_stack(0);
-	while (argv[++check])
-		setting_stack(temstack, argv[check], check, astack);
+	num = make_argv(argv, argc);
+	argc = num_len(num) + 1;
+	while (*(num + ++check))
+		setting_stack(temstack, *(num + check), check, astack);
 	if (argc <= 3)
 		simple_check_sort(astack);
 	else if (argc == 4)
@@ -721,6 +754,7 @@ int	main(int argc, char *argv[])
 		astack = start_sort(astack, argc - 1, temstack);
 	free_stack(temstack);
 	free_stack(astack);
-//	 system("leaks push_swap");
+	free(num);
+	//  system("leaks push_swap");
 	return (0);
 }

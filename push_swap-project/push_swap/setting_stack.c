@@ -61,14 +61,13 @@ char	check_factor(long long factor)
 		return (0);
 	return ('1');
 }
-
 void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack)
 {
 	long long	factor;
 
 	if (!(factor = change_factor(argv)) && factor != 0)
 		print_error();
-	if (i == 1)
+	if (i == 0)
 	{
 		if ((!check_factor(factor)) || !make_firststack((int)factor, temstack))
 			print_error();
