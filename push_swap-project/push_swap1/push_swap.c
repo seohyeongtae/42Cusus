@@ -600,6 +600,30 @@ t_stack	*run_pb_min(t_stack *astack, t_stack *bstack)
 	return (next_astack);
 }
 
+t_stack *check_pp_min_run(t_stack *astack, t_stack *f_stack, int pivot, int f_num)
+{
+	t_stack	*anext_stack;
+
+	anext_stack = astack->next;
+	 if (astack->num < f_stack->num && astack->num < anext_stack->num
+	 && astack->num != pivot && astack->num != f_num)
+	{
+		astack = run_rra(astack);
+		astack = run_sa(astack);
+	}
+	else if (astack->num < f_stack->num && astack->num < anext_stack->num
+	&& astack->num != pivot && astack->num != f_num)
+		run_sa(astack);
+	else if (astack->num < f_stack->num && astack->num > anext_stack->num
+	&& astack->num != pivot && astack->num != f_num)
+	{
+		astack = run_rra(astack);
+		astack = run_sa(astack);
+	}
+	else 
+		astack = run_ra(astack);
+	return (astack);
+}
 
 t_stack	*check_pp_min(t_stack *astack, t_stack *bstack, int pivot, int f_num)
 {
@@ -614,20 +638,8 @@ t_stack	*check_pp_min(t_stack *astack, t_stack *bstack, int pivot, int f_num)
 		astack = run_pb_min(astack, bstack);
 	else if (check_sort_re(astack))
 		run_reverse(astack, pivot);	
-	else if (astack->num < final_stack->num && astack->num < anext_stack->num && astack->num != pivot && astack->num != f_num)
-	{
-		astack = run_rra(astack);
-		astack = run_sa(astack);
-	}
-	else if (astack->num < final_stack->num && astack->num < anext_stack->num && astack->num != pivot && astack->num != f_num)
-		run_sa(astack);
-	else if (astack->num < final_stack->num && astack->num > anext_stack->num && astack->num != pivot && astack->num != f_num)
-	{
-		astack = run_rra(astack);
-		astack = run_sa(astack);
-	}
-	else 
-		astack = run_ra(astack);
+	else
+		astack = check_pp_min_run(astack, final_stack, pivot, f_num);
 	return (astack);
 }
 
@@ -725,14 +737,14 @@ int	main(int argc, char *argv[])
 
 	// }
 
-		while (astack->front)
-		astack = astack->front;
+	// 	while (astack->front)
+	// 	astack = astack->front;
 	
-	while (astack)
-		{
-			printf("final astack======== %d\n", astack->num);
-			astack = astack->next;
-		}
+	// while (astack)
+	// 	{
+	// 		printf("final astack======== %d\n", astack->num);
+	// 		astack = astack->next;
+	// 	}
 	// free_stack(temstack);
 	// free_stack(astack);
 	// free_stack(bstack);
