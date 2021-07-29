@@ -3,37 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: minckim <minckim@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/05/17 16:24:21 by hyseo             #+#    #+#              #
-#    Updated: 2021/07/29 14:07:33 by hyseo            ###   ########.fr        #
+#    Created: 2021/03/09 02:28:13 by minckim           #+#    #+#              #
+#    Updated: 2021/03/12 15:47:28 by minckim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-NAME = push_swap
-HEADER = push_swap.h
-OBJS = 	push_swap.o \
-		make_temstack.o \
-		ft_split.o \
-		ft_strjoin.o \
-		setting_stack.o 
+all : name
 
-all : $(NAME)
+name : random_numbers
 
-%.o: %.c $(HEADER)
-		$(CC) $(CFLAGS) -c $< -o $@
+random_numbers : random_numbers.cpp
+	clang++ random_numbers.cpp --std=c++11 -o random_numbers
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-clean :
-	rm -f $(OBJS)
-
-fclean : clean
-	rm -f $(NAME)
-
-re : fclean all
-
-.PHONY : clean fclean all
+fclean:
+	rm -rf random_numbers

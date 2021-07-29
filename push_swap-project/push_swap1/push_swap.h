@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 15:30:43 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/09 16:02:41 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/07/27 16:33:54 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	make_firststack(int factor, t_stack *temstack);
 int	find_pivot_min(int argc, t_stack *temstack);
 int	find_pivot(int argc, t_stack *temstack);
 
-t_stack	*set_stack(int index, int factor);
+t_stack	*set_stack(int factor);
 char	check_factor(long long factor);
 void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack);
 void	setting_stack_tem(t_stack *temstack, int argv, int i);
@@ -46,5 +46,7 @@ char	make_astack(int factor, t_stack *astack);
 
 t_stack	*check_pp(t_stack *astack, t_stack *bstack, int count);
 t_stack *check_b(t_stack *astack, t_stack *bstack, int count);
+char	**ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

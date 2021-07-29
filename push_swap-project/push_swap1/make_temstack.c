@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:10:26 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/06 20:37:27 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/07/27 16:33:20 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	linked_temstack_back(int factor, t_stack *temstack)
 {
 	t_stack	*new_stack;
 
-	new_stack = set_stack(1, factor);
+	new_stack = set_stack(factor);
 	while (temstack)
 	{
 		if (temstack->next == NULL)
@@ -46,7 +46,7 @@ char	linked_temstack_front(int factor, t_stack *temstack)
 {
 	t_stack	*new_stack;
 
-	new_stack = set_stack(1, factor);
+	new_stack = set_stack(factor);
 	while (temstack)
 	{
 		if (temstack->front == NULL)

@@ -6,13 +6,13 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:14:12 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/07 19:13:16 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/07/27 16:33:58 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*set_stack(int index, int factor)
+t_stack	*set_stack(int factor)
 {
 	t_stack	*stack;
 
@@ -61,14 +61,13 @@ char	check_factor(long long factor)
 		return (0);
 	return ('1');
 }
-
 void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack)
 {
 	long long	factor;
 
 	if (!(factor = change_factor(argv)) && factor != 0)
 		print_error();
-	if (i == 1)
+	if (i == 0)
 	{
 		if ((!check_factor(factor)) || !make_firststack((int)factor, temstack))
 			print_error();

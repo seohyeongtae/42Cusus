@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 19:14:12 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/27 16:33:58 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/07/29 16:53:48 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_stack	*set_stack(int factor)
 	return (stack);
 }
 
-// +, - 는 중복 모두 체크하며 002 등은 인트로 계산  스페이스바도 체크해야 한다...........
 long long	change_factor(char *check)
 {
 	long long	factor;
@@ -61,11 +60,13 @@ char	check_factor(long long factor)
 		return (0);
 	return ('1');
 }
+
 void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack)
 {
 	long long	factor;
 
-	if (!(factor = change_factor(argv)) && factor != 0)
+	factor = change_factor(argv);
+	if (!factor && factor != 0)
 		print_error();
 	if (i == 0)
 	{
@@ -73,8 +74,9 @@ void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack)
 			print_error();
 		make_firststack((int)factor, astack);
 	}
-	else if ((!check_factor(factor)) || !make_temstack((int)factor, temstack) || !make_astack((int)factor, astack))
-			print_error();
+	else if ((!check_factor(factor)) || !make_temstack((int)factor, temstack)
+		|| !make_astack((int)factor, astack))
+		print_error();
 }
 
 void	setting_stack_tem(t_stack *temstack, int argv, int i)
@@ -85,5 +87,5 @@ void	setting_stack_tem(t_stack *temstack, int argv, int i)
 			print_error();
 	}
 	else if ((!check_factor(argv)) || !make_temstack(argv, temstack))
-			print_error();
+		print_error();
 }

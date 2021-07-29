@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 15:23:44 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/09 17:18:52 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/07/29 15:10:58 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ void	print_error(void)
 void	free_stack(t_stack *stack)
 {
 	t_stack *temp;
-
-	while(stack->front)
-		stack = stack->front;
-
+	
+	if (stack->front)
+	{
+		while(stack->front)
+			stack = stack->front;
+	}
 	while (stack)
 	{
 		temp = stack;
@@ -37,7 +39,7 @@ char	make_astack(int factor, t_stack *astack)
 {
 	t_stack *new_stack;
 
-	if (!(new_stack = set_stack(0, factor)))
+	if (!(new_stack = set_stack(factor)))
 		return (0);
 	while (astack->next)
 		astack = astack->next;
@@ -92,7 +94,7 @@ t_stack	*run_pa(t_stack *astack, t_stack *bstack)
 		astack = astack->front;
 	if (!(bstack->next))
 	{
-		new_stack = set_stack(0,0);
+		new_stack = set_stack(0);
 		new_stack->num = bstack->num;
 		astack->front = new_stack;
 		new_stack->next = astack;
@@ -232,8 +234,8 @@ t_stack *check_pp_b(t_stack *astack, t_stack *bstack, int pivot, int count)
 	pivot = rb;
 	while (bstack->next && rb-- > 0)
 		bstack = run_rrb(bstack);
-	// while (astack->front)
-	// 	 astack = astack->front;
+	while (astack->front)
+		 astack = astack->front;
 	if (pa > 0 && check > 1)
 		astack = check_pp(astack, bstack, pa);
 	if (pivot > 0)
@@ -253,7 +255,7 @@ t_stack *check_b(t_stack *astack, t_stack *bstack, int count)
 	pa = 1;
 	rb = count;
 	b = bstack;
-	b_tem = set_stack(0,0);
+	b_tem = set_stack(0);
 	while (rb > 0)
 	{
 		setting_stack_tem(b_tem, b->num, pa++);
@@ -359,6 +361,8 @@ t_stack *check_pp_a(t_stack *astack, t_stack *bstack, int pivot, int count)
 		astack = run_rra(astack);
 	if (ab > 1)
 		astack = check_pp(astack, bstack, ab);
+	while (bstack->front)
+			bstack = bstack->front;
 	if (pb > 0)
 		bstack = check_b(astack, bstack, pb);
 	return (astack);
@@ -374,7 +378,7 @@ t_stack	*check_pp(t_stack *astack, t_stack *bstack, int count)
 
 	pb = 1;
 	a = astack;
-	a_tem = set_stack(0,0);
+	a_tem = set_stack(0);
 	ra = count;
 	while (ra > 0)
 	{
@@ -393,11 +397,12 @@ t_stack	*run_pa_min(t_stack *astack, t_stack *bstack)
 {
 	t_stack *new_stack;
 
-	new_stack = set_stack(0,0);
+	new_stack = set_stack(0);
 	new_stack->num = bstack->num;
 	astack->front = new_stack;
 	new_stack->next = astack;
-	new_stack->front = NULL;
+	if (bstack->next)
+		(bstack->next)->front = NULL;
 	free(bstack);
 	write(1, "pa\n", 3);
 	return (new_stack);
@@ -418,8 +423,8 @@ char	check_sort_re(t_stack *astack)
 
 t_stack *run_reverse(t_stack *astack, int pivot)
 {
-	//while (!(astack->num = pivot))
 	astack = run_ra(astack);
+	pivot++;
 	return (astack);
 }
 
@@ -432,17 +437,9 @@ t_stack *end_sort(t_stack *astack, t_stack *bstack)
 	temp = bstack;
 	while (temp)
 	{
-		if (bstack->index == 1 && bstack->next)
-		{
 			temp = temp->next;
 			astack = run_pa_min(astack, bstack);
 			bstack = temp;
-		}
-		else
-		{
-			temp = temp->next;
-			astack = run_pa_min(astack, bstack);
-		}
 	}
 	return (astack);
 }
@@ -453,7 +450,7 @@ t_stack	*start_sort(t_stack *astack, int count, t_stack *tem)
 	int		i;
 	t_stack *bstack;
 
-	bstack = set_stack(0,0);
+	bstack = set_stack(0);
 	i = 0;
 	pivot = find_pivot(count / 2, tem);
 	if (!(check_sort(astack, bstack)))
@@ -474,23 +471,11 @@ t_stack	*start_sort(t_stack *astack, int count, t_stack *tem)
 		if (!check_sort_b(bstack))
 			 bstack = check_b(astack, bstack, (count / 2));
 	}
-	free(bstack);
-	return (astack);
-}
-
-t_stack		*simple_check_sort(t_stack *astack)
-{
-	if (astack->next)
-	{
-		if (astack->num < (astack->next)->num)
-			return (0);
-		else 
-			run_ra(astack);
-	}
 	return (astack);
 }
 
 int		num_sort_three(t_stack *astack, t_stack *next, t_stack *final)
+
 {
 	if (astack->num > next->num && astack->num > final->num
 	&& next->num > final->num)
@@ -514,6 +499,7 @@ int		num_sort_three(t_stack *astack, t_stack *next, t_stack *final)
 }
 
 t_stack		*simple_check_sort_three(t_stack *astack)
+
 {
 	t_stack *final;
 	t_stack *next;
@@ -543,6 +529,18 @@ t_stack		*simple_check_sort_three(t_stack *astack)
 	return (astack);
 }
 
+int		simple_check_sort(t_stack *astack)
+{
+	if (astack->next)
+	{
+		if (astack->num < (astack->next)->num)
+			return (0);
+		else 
+			run_ra(astack);
+	}
+	return (0);
+}
+
 int	*check_pp_b_min(t_stack *astack, t_stack *bstack)
 {
 	t_stack *bnext_stack;
@@ -568,7 +566,6 @@ int	*check_pp_b_min(t_stack *astack, t_stack *bstack)
 		check_pp_b_min(astack, bstack);
 	return (0);
 }
-
 
 t_stack	*run_pb_min(t_stack *astack, t_stack *bstack)
 {
@@ -643,7 +640,6 @@ t_stack	*check_pp_min(t_stack *astack, t_stack *bstack, int pivot, int f_num)
 	return (astack);
 }
 
-
 t_stack	*start_sort_min(t_stack *astack, t_stack *bstack, t_stack *tem, int argc)
 {
 	int	f_num;
@@ -671,6 +667,7 @@ t_stack	*start_sort_min(t_stack *astack, t_stack *bstack, t_stack *tem, int argc
 }
 
 t_stack *simple_check_sort_five(t_stack *astack, t_stack *bstack, t_stack *tem, int argc)
+
 {
 	int	pivot;
 	int	count;
@@ -699,58 +696,65 @@ t_stack *simple_check_sort_five(t_stack *astack, t_stack *bstack, t_stack *tem, 
 	return (astack);
 }
 
+char	**make_argv(char **argv)
+{
+	char	*num;
+	int		count;
+	char	**final_num;
+
+	num = (char *)malloc(sizeof(char) * 2);
+	num[0] = ' ';
+	num[1] = '\0';
+	count = 1;
+	while (argv[count])
+	{
+		num = ft_strjoin(num, argv[count]);
+		num = ft_strjoin(num, " ");
+		count++;
+	}
+	final_num = ft_split(num, ' ');
+	free(num);
+	return (final_num);
+}
+
+int		num_len(char **num)
+{
+	int	count;
+	count = 0;
+	while(*(num + count))
+		count++;
+	return (count);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack		*temstack;
 	int			check;
 	t_stack		*astack;
 	t_stack		*bstack;
+	char		**num;
 
-	check = 0;
-	temstack = set_stack(0, 0);
-	astack = set_stack(0, 0);
-	bstack = set_stack(0, 0);
-	while (argv[++check])
-		setting_stack(temstack, argv[check], check, astack);
+	check = -1;
+	temstack = set_stack(0);
+	astack = set_stack(0);
+	bstack = set_stack(0);
+	num = make_argv(argv);
+	argc = num_len(num) + 1;
+	while (*(num + ++check))
+		setting_stack(temstack, *(num + check), check, astack);
 	if (argc <= 3)
 		simple_check_sort(astack);
 	else if (argc == 4)
 		astack = simple_check_sort_three(astack);
 	else if (argc == 6)
 		astack = simple_check_sort_five(astack, bstack, temstack, argc);
-	else if (argc > 4 && argc < 12)
-		astack = start_sort_min(astack, bstack, temstack, argc);
+	else if (argc > 3 && argc < 12)
+		start_sort_min(astack, bstack, temstack, argc);
 	else 
 		astack = start_sort(astack, argc - 1, temstack);
-
-	// if (bstack)
-	// 	printf("bbb final bstack======== %d\n", bstack->num);
-	// if (bstack->next)
-	// {
-	// while (bstack->front)
-	// 	bstack = bstack->front;
-	// while (bstack)
-	// 	{
-	// 		printf("bbb final bstack======== %d\n", bstack->num);
-	// 		bstack = bstack->next;
-	// 	}
-
-	// }
-
-	// 	while (astack->front)
-	// 	astack = astack->front;
-	
-	// while (astack)
-	// 	{
-	// 		printf("final astack======== %d\n", astack->num);
-	// 		astack = astack->next;
-	// 	}
-	// free_stack(temstack);
-	// free_stack(astack);
-	// free_stack(bstack);
-	
-	// system("leaks a.out");
-
-	
+	free_stack(temstack);
+	free_stack(astack);
+	free(num);
+	//  system("leaks push_swap");
 	return (0);
 }
