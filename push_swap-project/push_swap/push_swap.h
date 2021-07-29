@@ -68,6 +68,7 @@ t_stack	*check_pp_min(t_stack *astack, t_stack *bstack, int pivot, int f_num);
 char	make_astack(int factor, t_stack *astack);
 char	**make_argv(char **argv);
 int		num_len(char **num);
+t_stack	*check_argc(t_stack *a, t_stack *b, t_stack *tem, int argc);
 
 t_stack	*set_stack(int factor);
 long long	change_factor(char *check);

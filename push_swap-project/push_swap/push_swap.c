@@ -55,6 +55,21 @@ int	num_len(char **num)
 	return (count);
 }
 
+t_stack	*check_argc(t_stack *a, t_stack *b, t_stack *tem, int argc)
+{
+	if (argc <= 3)
+		simple_check_sort(a);
+	else if (argc == 4)
+		a = simple_check_sort_three(a);
+	else if (argc == 6)
+		a = simple_check_sort_five(a, b, tem, argc);
+	else if (argc > 3 && argc < 12)
+		start_sort_min(a, b, tem, argc);
+	else
+		a = start_sort(a, argc - 1, tem);
+	return (a);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack		*temstack;
@@ -71,16 +86,7 @@ int	main(int argc, char *argv[])
 	argc = num_len(num) + 1;
 	while (*(num + ++check))
 		setting_stack(temstack, *(num + check), check, astack);
-	if (argc <= 3)
-		simple_check_sort(astack);
-	else if (argc == 4)
-		astack = simple_check_sort_three(astack);
-	else if (argc == 6)
-		astack = simple_check_sort_five(astack, bstack, temstack, argc);
-	else if (argc > 3 && argc < 12)
-		start_sort_min(astack, bstack, temstack, argc);
-	else
-		astack = start_sort(astack, argc - 1, temstack);
+	astack = check_argc(astack, bstack, temstack, argc);
 	free_stack(temstack);
 	free_stack(astack);
 	free(num);
