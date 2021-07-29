@@ -68,6 +68,12 @@ char	linked_temstack_front(int factor, t_stack *temstack)
 	return (0);
 }
 
+char	make_firststack(int factor, t_stack *temstack)
+{
+	temstack->num = factor;
+	return ('1');
+}
+
 char	make_temstack(int factor, t_stack *temstack)
 {
 	if (temstack->num < factor)
@@ -77,46 +83,4 @@ char	make_temstack(int factor, t_stack *temstack)
 	else
 		print_error();
 	return ('1');
-}
-
-char	make_firststack(int factor, t_stack *temstack)
-{
-	temstack->num = factor;
-	return ('1');
-}
-
-int	find_pivot_min(int argc, t_stack *temstack)
-{
-	int	pivot;
-	int	i;
-
-	pivot = 0;
-	i = 0;
-	while (temstack->front)
-		temstack = temstack->front;
-	while (++i < argc / 2)
-	{
-		if (temstack->next)
-			temstack = temstack->next;
-	}
-	pivot = temstack->num;
-	return (pivot);
-}
-
-int	find_pivot(int argc, t_stack *temstack)
-{
-	int	pivot;
-	int	i;
-
-	pivot = 0;
-	i = 0;
-	while (temstack->front)
-		temstack = temstack->front;
-	while (i++ < argc)
-	{
-		if (temstack->next)
-			temstack = temstack->next;
-	}
-	pivot = temstack->num;
-	return (pivot);
 }

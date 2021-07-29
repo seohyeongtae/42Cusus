@@ -16,6 +16,14 @@ NAME = push_swap
 HEADER = push_swap.h
 OBJS = 	push_swap.o \
 		make_temstack.o \
+		check_pp_min.o \
+		check_pp.o \
+		check_sort.o \
+		find_pivot.o \
+		run_min.o \
+		run_r.o \
+		run_s_p.o \
+		start_sort.o \
 		ft_split.o \
 		ft_strjoin.o \
 		setting_stack.o 
