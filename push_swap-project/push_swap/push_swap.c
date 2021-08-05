@@ -26,16 +26,17 @@ char	make_astack(int factor, t_stack *astack)
 
 char	**make_argv(char **argv)
 {
-	char	*num;
-	int		count;
-	char	**final_num;
+	char		*num;
+	int			count;
+	char		**final_num;
+	long long 	factor;
 
 	num = (char *)malloc(sizeof(char) * 2);
 	num[0] = ' ';
 	num[1] = '\0';
 	count = 1;
 	while (argv[count])
-	{
+	{	
 		num = ft_strjoin(num, argv[count]);
 		num = ft_strjoin(num, " ");
 		count++;
@@ -57,16 +58,19 @@ int	num_len(char **num)
 
 t_stack	*check_argc(t_stack *a, t_stack *b, t_stack *tem, int argc)
 {
-	if (argc <= 3)
-		simple_check_sort(a);
-	else if (argc == 4)
-		a = simple_check_sort_three(a);
-	else if (argc == 6)
-		a = simple_check_sort_five(a, b, tem, argc);
-	else if (argc > 3 && argc < 12)
-		start_sort_min(a, b, tem, argc);
-	else
-		a = start_sort(a, argc - 1, tem);
+	if (!check_sort(a, b))
+	{
+		if (argc <= 3)
+			simple_check_sort(a);
+		else if (argc == 4)
+			a = simple_check_sort_three(a);
+		else if (argc == 6)
+			a = simple_check_sort_five(a, b, tem, argc);
+		else if (argc > 3 && argc < 12)
+			start_sort_min(a, b, tem, argc);
+		else
+			a = start_sort(a, argc - 1, tem);
+	}
 	return (a);
 }
 
@@ -89,7 +93,7 @@ int	main(int argc, char *argv[])
 	astack = check_argc(astack, bstack, temstack, argc);
 	free_stack(temstack);
 	free_stack(astack);
-	free(num);
-	//  system("leaks push_swap");
+	free(*(num));
+	// system("leaks push_swap");
 	return (0);
 }

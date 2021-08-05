@@ -12,6 +12,34 @@
 
 #include "push_swap.h"
 
+int		check_flag(char *check)
+{
+	int	i;
+	int	minus;
+	int	plus;
+
+	i = -1;
+	minus = 1;
+	plus = 0;
+	while (check[++i] && (check[i] == '+'
+			|| check[i] == '-' || check[i] == ' '))
+	{	
+		if (check[i] == '-')
+		{
+			if (plus == 1 || minus == -1)
+				print_error();
+			minus = -1;
+		}
+		if (check[i] == '+')
+		{
+			if (plus == 1 || minus == -1)
+				print_error();
+			plus = 1;
+		}
+	}
+	return (minus);
+}
+
 char	check_sort_b(t_stack *bstack)
 {
 	while (bstack->front)

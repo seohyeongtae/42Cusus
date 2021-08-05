@@ -32,19 +32,16 @@ long long	change_factor(char *check)
 	int			i;
 	int			minus;
 
-	i = -1;
+	i = 0;
 	factor = 0;
-	minus = 1;
-	while (check[++i] && (check[i] == '+'
+	minus = check_flag(check);
+	while (check[i] && (check[i] == '+'
 			|| check[i] == '-' || check[i] == ' '))
-	{
-		if (check[i] == '-')
-			minus *= -1;
-	}
-	if (!('0' <= check[i] && check[i] <= '9'))
-		print_error();
+		i++;
 	while (check[i])
 	{
+		if (!('0' <= check[i] && check[i] <= '9'))
+			print_error();
 		factor *= 10;
 		factor += check[i] - '0';
 		i++;

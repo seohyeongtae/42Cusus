@@ -39,6 +39,7 @@ t_stack	*run_rra(t_stack *astack);
 t_stack	*run_rb(t_stack *bstack);
 t_stack	*run_ra(t_stack *astack);
 
+int		check_flag(char *check);
 char	check_sort_b(t_stack *bstack);
 char	check_sort_re(t_stack *astack);
 int		simple_check_sort(t_stack *astack);
