@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int		check_flag(char *check)
+int	check_flag(char *check)
 {
 	int	i;
 	int	minus;

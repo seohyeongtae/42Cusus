@@ -39,7 +39,7 @@ long long	change_factor(char *check)
 			|| check[i] == '-' || check[i] == ' '))
 		i++;
 	while (check[i] == ' ')
-			i++;
+		i++;
 	while (check[i])
 	{
 		if (!('0' <= check[i] && check[i] <= '9'))

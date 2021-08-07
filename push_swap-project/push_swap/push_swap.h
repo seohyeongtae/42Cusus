@@ -72,7 +72,6 @@ int		num_len(char **num);
 t_stack	*check_argc(t_stack *a, t_stack *b, t_stack *tem, int argc);
 
 t_stack	*set_stack(int factor);
-long long	change_factor(char *check);
 char	check_factor(long long factor);
 void	setting_stack_tem(t_stack *temstack, int argv, int i);
 void	setting_stack(t_stack *temstack, char *argv, int i, t_stack *astack);
@@ -88,7 +87,6 @@ char	**make_free(char **result, int i);
 char	**ft_split2(char **result, char const *s, char c, int word_num);
 char	**ft_split(char const *s, char c);
 
-unsigned int	ft_strlen(const char *str);
-char			*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

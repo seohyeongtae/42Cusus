@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 15:23:44 by hyseo             #+#    #+#             */
-/*   Updated: 2021/07/29 16:11:30 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/08/07 15:23:43 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ int	main(int argc, char *argv[])
 	free_stack(temstack);
 	free_stack(astack);
 	free(*(num));
-	// system("leaks push_swap");
+	system("leaks push_swap");
 	return (0);
 }
