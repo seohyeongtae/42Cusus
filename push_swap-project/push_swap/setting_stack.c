@@ -38,6 +38,8 @@ long long	change_factor(char *check)
 	while (check[i] && (check[i] == '+'
 			|| check[i] == '-' || check[i] == ' '))
 		i++;
+	while (check[i] == ' ')
+			i++;
 	while (check[i])
 	{
 		if (!('0' <= check[i] && check[i] <= '9'))
@@ -45,8 +47,6 @@ long long	change_factor(char *check)
 		factor *= 10;
 		factor += check[i] - '0';
 		i++;
-		while (check[i] == ' ')
-			i++;
 	}
 	return (factor * minus);
 }

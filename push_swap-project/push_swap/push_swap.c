@@ -29,7 +29,7 @@ char	**make_argv(char **argv)
 	char		*num;
 	int			count;
 	char		**final_num;
-	long long 	factor;
+	int			i;
 
 	num = (char *)malloc(sizeof(char) * 2);
 	num[0] = ' ';
@@ -37,6 +37,11 @@ char	**make_argv(char **argv)
 	count = 1;
 	while (argv[count])
 	{	
+		i = 0;
+		while (argv[count][i] == ' ')
+			i++;
+		if (!argv[count][i])
+			print_error();
 		num = ft_strjoin(num, argv[count]);
 		num = ft_strjoin(num, " ");
 		count++;
