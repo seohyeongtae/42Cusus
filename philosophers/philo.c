@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:57:32 by hyseo             #+#    #+#             */
-/*   Updated: 2021/12/16 20:46:24 by hyseo            ###   ########.fr       */
+/*   Updated: 2021/12/18 20:01:54 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include<sys/time.h>
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<stdbool.h>
 
 typedef enum e_state
 {
@@ -27,20 +27,15 @@ typedef enum e_state
 	FULL,
 }		t_state;
 
-
-// eat, print mutex 가 필요한 이유는 context switch 가 일어나면서
-// eat 혹은 print가 실행되지 않을 수 있다 -> 경쟁상태, 무한 점유 가 일어날 수 있다.
-// 포크 2개는 쥐었지만 eat 혹은 print가 실행되지 않아 자원을 반환하지 않을 수 있다.
 typedef struct s_info
 {
 	int	number_of_philosophers;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;
+	int	must_eat;
 	int all_eat;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	eat;
 	pthread_mutex_t	print;
 	t_state	state;
 	long long start_time;
@@ -59,7 +54,6 @@ typedef struct s_philo
 	pthread_t check_thread;
 	t_state	state;
 }		t_philo;
-
 
 int	ft_atoi(const char *str)
 {
@@ -101,7 +95,7 @@ long long	get_time(long cur_time)
 	return time;
 }
 
-void	make_mutex(t_info *info)
+bool	make_mutex(t_info *info)
 {
 	int	i;
 
@@ -110,15 +104,16 @@ void	make_mutex(t_info *info)
 	{
 		if (pthread_mutex_init(&info->fork[i], NULL) != 0)
 		{
-			printf("hterejl  \n");
-			exit(1);
+			printf("make mutex error  \n");
+			return (0);
 		}
 		i++;
 	}
 	info->start_time = get_time(0);
+	return (1);
 }
 
-void	make_info(int argc, char **argv, t_info *info)
+bool	make_info(int argc, char **argv, t_info *info)
 {
 	info->number_of_philosophers = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
@@ -127,38 +122,44 @@ void	make_info(int argc, char **argv, t_info *info)
 	info->state = START;
 	if (argc == 6)
 	{
-		info->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
-		if (info->number_of_times_each_philosopher_must_eat == 0)
-			exit(1);
+		info->must_eat = ft_atoi(argv[5]);
+		if (info->must_eat == 0)
+			return (0);
 	}
 	info->fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info->number_of_philosophers);
 	if (info->fork == NULL)
-		exit(1);
-	make_mutex(info);
-	//pthread_mutex_init(&info->eat, NULL);
+		return (0);
 	pthread_mutex_init(&info->print, NULL);
-	return;
+	return (make_mutex(info));
+}
+
+void	print_state(t_philo *philo, int state)
+{
+	if (pthread_mutex_lock(&philo->info->print) == 0)
+	{
+		if (state == 1)
+			printf("\e[0;32m %lld ms  %d  is sleeping\n", philo->cur_time, philo->i + 1);
+		else if (state == 2)
+			printf("\e[0;34m %lld ms  %d  is thinking\n", philo->cur_time, philo->i + 1);
+		else if (state == 3)
+			printf("\e[0;35m %lld ms  %d  is eating\n", philo->cur_time, philo->i + 1);
+		else if (state == 4)
+			printf("\e[0;33m %lld ms  %d  has taken a fork\n", philo->cur_time, philo->i + 1);
+		pthread_mutex_unlock(&philo->info->print);
+	}
 }
 
 void	do_sleep(t_philo *philo)
 {
 	if (philo->state == SLEEPING)
 	{
-		if (pthread_mutex_lock(&philo->info->print) == 0)
-		{
-			pthread_mutex_unlock(&philo->info->print);
-			philo->cur_time = get_time(philo->info->start_time);
-			printf("\e[0;32m %lld  %d  is SLEEPING\n", philo->cur_time, philo->i + 1);
-		}
-		usleep(philo->info->time_to_sleep * 1000);
+		philo->cur_time = get_time(philo->info->start_time);
+		print_state(philo, 1);
+		while (get_time(philo->info->start_time) - philo->cur_time < philo->info->time_to_sleep)
+			usleep(100);
 		philo->state = THINKING;
-		if (pthread_mutex_lock(&philo->info->print) == 0)
-		{
-			pthread_mutex_unlock(&philo->info->print);
-			philo->cur_time = get_time(philo->info->start_time);
-			printf("\e[0;34m %lld  %d  is THINKING\n", philo->cur_time, philo->i + 1);
-		}
-		//usleep(50);
+		philo->cur_time = get_time(philo->info->start_time);
+		print_state(philo, 2);
 	}
 }
 
@@ -166,20 +167,18 @@ void	do_eat(t_philo *philo)
 {
 	if (philo->state == EATING)
 	{
-		if (pthread_mutex_lock(&philo->info->print) == 0)
-		{
-			pthread_mutex_unlock(&philo->info->print);
-			philo->cur_time = get_time(philo->info->start_time);
-			philo->eat_time = philo->cur_time;
-			printf("\e[0;35m %lld  %d  is EATING\n", philo->cur_time, philo->i + 1);
-		}
-		usleep(philo->info->time_to_eat * 1000);
+		philo->cur_time = get_time(philo->info->start_time);
+		philo->eat_time = philo->cur_time;
+		print_state(philo, 3);
+		philo->cnt_eat += 1;
+		if (philo->cnt_eat == philo->info->must_eat
+		&& philo->info->must_eat != 0)
+			philo->info->all_eat += 1;
+		while (get_time(philo->info->start_time) - philo->cur_time < philo->info->time_to_eat)
+			usleep(100);
 		philo->state = SLEEPING;
 		pthread_mutex_unlock(&philo->info->fork[philo->left]);
 		pthread_mutex_unlock(&philo->info->fork[philo->right]);
-		philo->info->all_eat += 1;
-		// do_sleep(philo);
-		// printf("%d  pppp\n\n", philo->info->all_eat);
 	}
 }
 
@@ -196,12 +195,7 @@ void	pick_fork(t_philo *philo)
 		{
 			philo->state = EATING;
 			philo->cur_time = get_time(philo->info->start_time);
-		if (pthread_mutex_lock(&philo->info->print) == 0)
-		{
-			pthread_mutex_unlock(&philo->info->print);
-			printf("\e[0;33m%lld  %d  has a fork\n", philo->cur_time, philo->i + 1);
-		}
-			// do_eat(philo);
+			print_state(philo, 4);
 		}
 	}
 	if (philo->state == THINKING && cnt == 1)
@@ -211,12 +205,7 @@ void	pick_fork(t_philo *philo)
 		{
 			philo->state = EATING;
 			philo->cur_time = get_time(philo->info->start_time);
-			if (pthread_mutex_lock(&philo->info->print) == 0)
-			{
-				pthread_mutex_unlock(&philo->info->print);
-				printf("\e[0;33m%lld  %d  has a fork\n", philo->cur_time, philo->i + 1);
-			}
-			// do_eat(philo);
+			print_state(philo, 4);
 		}
 	}
 }
@@ -228,11 +217,10 @@ void	*run_thread(void *philo)
 	p = philo;
 	while(1)
 	{
-		// if (p->info->state == FULL || p->info->state == DIED)
-		// 	break;
 		pick_fork(philo);
 		do_eat(philo);
 		do_sleep(philo);
+		usleep(200);
 	}
 	return (NULL);
 }
@@ -246,31 +234,27 @@ void	*check_thread(void *philo)
 	while (1)
 	{
 		time = get_time(p->info->start_time);
-		
-		//philo->cur_time = get_time(philo->info->start_time);
 		if (p->info->state == FULL || p->info->state == DIED)
 			break;
-		if (time - p->eat_time > p->info->time_to_die)
+		if (p->info->all_eat == p->info->number_of_philosophers)
 		{
-			p->state = DIED;
-			p->info->state = DIED;
+			p->info->state = FULL;
 			if (pthread_mutex_lock(&p->info->print) == 0)
-			{
-				printf("\e[0;31m%lld  %d  is DIEDDDDDDDDDDDDDDDDDDDDDD\n", time, p->i + 1);
-				//printf("%d   sfasdfdasf time 11\n", p->info->time_to_die);
-				// printf("%lld   time time 22\n", time);
-				// printf("%lld   eat time 22\n", p->eat_time);
-				// printf("%lld   time-eattime 33\n", time - p->eat_time);
-				// printf("%lld   died time\n", get_time(p->info->start_time) - time);
-			}
+				printf("\e[0;31m %lld ms  all philosopher eat  \n", time);
 			break;
 		}
-		
+		if (time - p->eat_time > p->info->time_to_die)
+		{
+			p->info->state = DIED;
+			if (pthread_mutex_lock(&p->info->print) == 0)
+				printf("\e[0;31m %lld ms  %d  is died\n", time, p->i + 1);
+			break;
+		}
 	}
 	return (NULL);
 }
 
-void	make_philo(t_info *info, t_philo *philo)
+bool	make_philo(t_info *info, t_philo *philo)
 {
 	int	i;
 	void **a;
@@ -278,7 +262,6 @@ void	make_philo(t_info *info, t_philo *philo)
 	i = 0;
 	while (i < info->number_of_philosophers)
 	{
-		//printf("aaaaa + %d \n", i);
 		philo[i].i = i;
 		philo[i].right = (i + 1) % info->number_of_philosophers;
 		philo[i].left = i;
@@ -288,12 +271,13 @@ void	make_philo(t_info *info, t_philo *philo)
 		philo[i].state = THINKING;
 		if (pthread_create(&philo[i].run_thread, NULL, run_thread, &philo[i]) ||
 		pthread_detach(philo[i].run_thread))
-			printf("whyyyyy \n");
+			return (0);
 		if (pthread_create(&philo[i].check_thread, NULL, check_thread, &philo[i]) ||
 		pthread_detach(philo[i].check_thread))
-			printf("whyyyyy \n");
+			return (0);
 		i++;
 	}
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -302,17 +286,26 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	if (argc == 5 || argc == 6)
-		make_info(argc, argv, &info);
+	{
+		if (!make_info(argc, argv, &info))
+			return (1);
+	}
 	else
-		exit(1);
+	{
+		printf("argv error!");
+		return (1);
+	}
 	philo = (t_philo *)malloc(info.number_of_philosophers * sizeof(t_philo));
 	if (philo == NULL)
-		exit(1);
-	make_philo(&info, philo);
-	// died 가 생길때까지 or cnt가 다 채워질 때까지
+		return (1);
+	if (!make_philo(&info, philo))
+	{
+		free(philo);
+		printf("thread error!");
+		return (1);
+	}
 	while(info.state != DIED && info.state != FULL);
-	// 전부다 free 시키고 종료하기
-	printf("%lld  sdfjadkfjladsfjlksdjfl \n", get_time(info.start_time));
-	//system("leaks a.out");
+	free(philo);
+	usleep(1000*1000);
 	return (0);
 }
