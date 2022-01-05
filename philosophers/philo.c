@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 16:57:32 by hyseo             #+#    #+#             */
-/*   Updated: 2021/12/18 20:01:54 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/01/05 20:46:55 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,17 +135,24 @@ bool	make_info(int argc, char **argv, t_info *info)
 
 void	print_state(t_philo *philo, int state)
 {
+	usleep(100);
 	if (pthread_mutex_lock(&philo->info->print) == 0)
 	{
-		if (state == 1)
+		if (philo->info->state == FULL || philo->info->state == DIED)
+		{
+			pthread_mutex_unlock(&philo->info->print);
+			return;
+		}
+		else if (state == 1 && philo)
 			printf("\e[0;32m %lld ms  %d  is sleeping\n", philo->cur_time, philo->i + 1);
-		else if (state == 2)
+		else if (state == 2 && philo)
 			printf("\e[0;34m %lld ms  %d  is thinking\n", philo->cur_time, philo->i + 1);
-		else if (state == 3)
+		else if (state == 3 && philo)
 			printf("\e[0;35m %lld ms  %d  is eating\n", philo->cur_time, philo->i + 1);
-		else if (state == 4)
+		else if (state == 4 && philo)
 			printf("\e[0;33m %lld ms  %d  has taken a fork\n", philo->cur_time, philo->i + 1);
-		pthread_mutex_unlock(&philo->info->print);
+		if (philo->info->state != FULL && philo->info->state != DIED)
+			pthread_mutex_unlock(&philo->info->print);
 	}
 }
 
@@ -215,7 +222,7 @@ void	*run_thread(void *philo)
 	t_philo *p;
 	
 	p = philo;
-	while(1)
+	while(p->info->state != FULL && p->info->state != DIED)
 	{
 		pick_fork(philo);
 		do_eat(philo);
@@ -240,7 +247,7 @@ void	*check_thread(void *philo)
 		{
 			p->info->state = FULL;
 			if (pthread_mutex_lock(&p->info->print) == 0)
-				printf("\e[0;31m %lld ms  all philosopher eat  \n", time);
+				printf("\e[0;31m %lld ms  all philosopher eat\n", time);
 			break;
 		}
 		if (time - p->eat_time > p->info->time_to_die)
@@ -257,7 +264,6 @@ void	*check_thread(void *philo)
 bool	make_philo(t_info *info, t_philo *philo)
 {
 	int	i;
-	void **a;
 
 	i = 0;
 	while (i < info->number_of_philosophers)
@@ -270,9 +276,9 @@ bool	make_philo(t_info *info, t_philo *philo)
 		philo[i].info = info;
 		philo[i].state = THINKING;
 		if (pthread_create(&philo[i].run_thread, NULL, run_thread, &philo[i]) ||
-		pthread_detach(philo[i].run_thread))
+		pthread_create(&philo[i].check_thread, NULL, check_thread, &philo[i]))
 			return (0);
-		if (pthread_create(&philo[i].check_thread, NULL, check_thread, &philo[i]) ||
+		if (pthread_detach(philo[i].run_thread) ||
 		pthread_detach(philo[i].check_thread))
 			return (0);
 		i++;
@@ -305,7 +311,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	while(info.state != DIED && info.state != FULL);
-	free(philo);
-	usleep(1000*1000);
+	// system("leaks a.out");
+	usleep(100*1000);
+	//free(philo);
+	//printf("ebdebd \n");
 	return (0);
 }
