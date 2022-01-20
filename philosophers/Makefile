@@ -6,7 +6,7 @@
 #    By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/18 17:45:45 by hyseo             #+#    #+#              #
-#    Updated: 2022/01/18 17:46:56 by hyseo            ###   ########.fr        #
+#    Updated: 2022/01/20 18:38:39 by hyseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS = -Wall -Werror -Wextra
 NAME = philo
 HEADER = philo.h
 OBJS = 	philo.o \
-		dothread.o \
+		do_thread.o \
 		setting.o
 
 all : $(NAME)
