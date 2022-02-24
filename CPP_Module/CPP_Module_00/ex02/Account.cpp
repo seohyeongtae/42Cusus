@@ -6,13 +6,13 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 20:07:44 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/23 17:18:50 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/02/23 22:37:07 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
-#include "time.h"
-#include "iostream"
+#include <time.h>
+#include <iostream>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
