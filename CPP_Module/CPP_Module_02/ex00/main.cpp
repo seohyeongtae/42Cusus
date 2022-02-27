@@ -5,22 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 02:06:02 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/25 17:31:41 by hyseo            ###   ########.fr       */
+/*   Created: 2022/02/25 20:14:31 by hyseo             #+#    #+#             */
+/*   Updated: 2022/02/25 21:36:42 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#include "Fixed.hpp"
+#include <iostream>
 
-int main(void) {
-    Karen k;
-
-    k.complain("debug");
-    k.complain("bacon");
-    k.complain("burger");
-    k.complain("DEBUG");
-    k.complain("INFO");
-    k.complain("WARNING");
-    k.complain("ERROR");
-    return (0);
+int main( void ) {
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
 }

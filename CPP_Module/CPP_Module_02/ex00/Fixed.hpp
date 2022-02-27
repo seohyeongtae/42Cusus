@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 02:06:02 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/25 17:31:41 by hyseo            ###   ########.fr       */
+/*   Created: 2022/02/25 20:40:06 by hyseo             #+#    #+#             */
+/*   Updated: 2022/02/25 21:36:44 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Karen.hpp"
+#ifndef	FIXED_HPP
+# define FIXED_HPP
 
-int main(void) {
-    Karen k;
+#include <iostream>
 
-    k.complain("debug");
-    k.complain("bacon");
-    k.complain("burger");
-    k.complain("DEBUG");
-    k.complain("INFO");
-    k.complain("WARNING");
-    k.complain("ERROR");
-    return (0);
-}
+class Fixed
+{
+private:
+	int					value;
+	const static int	bits;
+public:
+	Fixed();
+	~Fixed();
+	Fixed(Fixed &src);
+	Fixed & operator = (Fixed const &src);
+	int		getRawBits(void) const;
+	void	setRawBits(int const raw);
+};
+#endif

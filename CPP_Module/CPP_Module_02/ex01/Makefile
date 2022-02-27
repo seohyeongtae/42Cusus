@@ -6,7 +6,7 @@
 #    By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/20 09:55:53 by hyseo             #+#    #+#              #
-#    Updated: 2022/02/25 13:59:03 by hyseo            ###   ########.fr        #
+#    Updated: 2022/02/25 21:06:21 by hyseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,21 @@ CC	= c++
 CFLAGS = -Wall -Werror -Wextra
 RM	= rm -rf
 
-NAME	= megaphone
-OBJS	= megaphone.o
+NAME	= Fixed
+HEADER 	= Fixed.hpp
+OBJS	= Fixed.o	\
+		main.o	\
 
 all : $(NAME)
 
-%.o : %.c
+%.o : %.c $(HEADER) 
 		$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS) 
 		$(CC) $(CFLAGS) -o $@ $^
 
 clean : 
-		$(RM) $(OBJS)
+		$(RM) $(OBJS) *.replace
 
 fclean : clean
 		$(RM) $(NAME)

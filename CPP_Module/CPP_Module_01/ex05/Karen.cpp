@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:55:28 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/25 02:28:56 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/02/25 17:33:32 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	Karen::complain(std::string level) {
 			std::cout << "[ " << message[i] << "] " << std::endl;
 			(this->*(f[i]))();
 		}
-			
 	}
 }
 

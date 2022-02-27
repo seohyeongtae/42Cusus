@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:20:49 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/23 16:08:48 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/02/25 16:00:30 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	phonebook_search(Phonebook *phone, int index)
 {
 	int start = 0;
 	int finish = 8;
-
+	std::cout << std::setw(10) << "Index";
+	std::cout << " | "; 
 	std::cout << std::setw(10) << "First_name";
 	std::cout << " | "; 
 	std::cout << std::setw(10) << "Last_name";
@@ -70,6 +71,8 @@ void	phonebook_search(Phonebook *phone, int index)
 		&& phone[i].get_nick_name() != "\0" 
 		&& phone[i].get_phone_number() != "\0")
 		{
+			std::cout << std::setw(9) << i + 1 << ".";
+			std::cout << " | "; 
 			std::cout << std::setw(9) << phone[i].get_first_name() << ".";
 			std::cout << " | "; 
 			std::cout << std::setw(9) << phone[i].get_last_name() << ".";
@@ -90,10 +93,10 @@ int main(void)
 
 	exit = 1;
 	index = 0;
-	check = 1;
 	Phonebook phonebook[8];
 	while (exit)
 	{
+		check = 1;
 		std::cout << YELLOW << "\nPlease input command" << GREEN << std::endl;
 		std::string str;
 		getline(std::cin, str);
@@ -119,7 +122,7 @@ int main(void)
 			check = 0;
 			std::cout <<"EXIT" << std::endl;
 			exit = 0;
-		}
+		} 
 		if (check == 1)
 			std::cout << BLUE << "Wrong command" << std::endl;
 	}
