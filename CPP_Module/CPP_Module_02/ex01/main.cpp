@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 20:14:31 by hyseo             #+#    #+#             */
-/*   Updated: 2022/02/26 17:23:46 by hyseo            ###   ########.fr       */
+/*   Created: 2022/03/01 23:02:10 by hyseo             #+#    #+#             */
+/*   Updated: 2022/03/01 23:02:59 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-
 
 // 8 1000
 // 1000
@@ -24,14 +23,16 @@
 // 42.42 = 10860  -42.42 = -10860 
 // 42 = 10752
  
+// Fixed  *e = new Fixed (10);
+// Fixed *&i = e;
  
 int main( void ) {
 	Fixed a;
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
-	a = Fixed( 1234.4321f );
 
+	a = Fixed( 1234.4321f );
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "c is " << c << std::endl;
