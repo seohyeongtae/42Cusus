@@ -5,23 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 20:14:31 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 01:29:47 by hyseo            ###   ########.fr       */
+/*   Created: 2022/03/02 16:21:19 by hyseo             #+#    #+#             */
+/*   Updated: 2022/03/02 21:18:53 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
- 
-int main( void ) {
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-	return 0;
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
+
+int	main(void)
+{
+	FragTrap	a("a");
+	ScavTrap	b("b");
+
+	std::cout << std::endl;
+	a.attack("b");
+	b.takeDamage(a.getDamage());
+	std::cout << std::endl;
+	b.attack("a");
+	a.takeDamage(b.getDamage());
+	std::cout << std::endl;
+	a.attack("b");
+	b.takeDamage(a.getDamage());
+	std::cout << std::endl;
+	b.attack("a");
+	a.takeDamage(b.getDamage());
+	std::cout << std::endl;
+	b.guardGate();
+	std::cout << std::endl;
+	a.highFivesGuys();
+	std::cout << std::endl;
+	return (0);
 }

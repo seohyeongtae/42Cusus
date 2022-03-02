@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 20:41:33 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/01 23:19:22 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/02 01:14:29 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ Fixed	Fixed::operator--(int)
 	this->value--;
 	return (f);
 }
-
 
 Fixed &	Fixed::min(Fixed & f1, Fixed & f2)
 {
