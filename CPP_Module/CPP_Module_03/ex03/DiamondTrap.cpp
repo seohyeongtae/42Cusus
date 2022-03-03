@@ -6,15 +6,14 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 22:49:38 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 23:40:23 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/03 17:48:26 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
+DiamondTrap::DiamondTrap() : name(ClapTrap::name)
 {
-	name = ClapTrap::name;
 	ClapTrap::name += "_clap_name";
 	Hitpoints = FragTrap::Hitpoints;
 	energy = ScavTrap::energy;
@@ -22,7 +21,7 @@ DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
 	std::cout << Green << "DiamondTrap" << " set name!!" << std::endl << reset;
 }
 
-DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name), FragTrap(name)
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name)
 {
 	this->name = name;
 	this->Hitpoints = FragTrap::Hitpoints;
@@ -44,7 +43,7 @@ void	DiamondTrap::whoAmI()
 	std::cout << reset;
 }
 
-DiamondTrap::DiamondTrap(DiamondTrap &dia) : ScavTrap(dia), FragTrap(dia)
+DiamondTrap::DiamondTrap(DiamondTrap &dia) : ClapTrap(dia), ScavTrap(dia), FragTrap(dia)
 {
 	std::cout << Green << "(" << name 
 	<< ") DiamondTrap copy constructor called" << std::endl << reset;
@@ -52,11 +51,9 @@ DiamondTrap::DiamondTrap(DiamondTrap &dia) : ScavTrap(dia), FragTrap(dia)
 
 DiamondTrap &	DiamondTrap::operator=(DiamondTrap const & dia)
 {
+	ScavTrap::operator=(dia);
+	FragTrap::operator=(dia);
 	this->name = dia.name;
-	this->Hitpoints = dia.Hitpoints;
-	this->energy = dia.energy;
-	this->damage = dia.damage;
-	
 	std::cout << Green << "(" << name 
 	<< ") DiamondTrap operator called" << std::endl << reset;
 	return (*this);

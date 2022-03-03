@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 21:06:07 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 21:31:16 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:52:23 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	FragTrap::highFivesGuys()
 
 FragTrap &	FragTrap::operator=(FragTrap const & frag)
 {
-	this->name = frag.name;
-	this->Hitpoints = frag.Hitpoints;
-	this->energy = frag.energy;
-	this->damage = frag.damage;
+	ClapTrap::operator=(frag);
 	
 	std::cout << Yellow << "(" << name 
 	<< ") FragTrap operator called" << std::endl << reset;

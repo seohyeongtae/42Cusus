@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 18:08:56 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 21:03:48 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/03 16:51:42 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ void	ScavTrap::guardGate()
 
 ScavTrap &	ScavTrap::operator=(ScavTrap const & scav)
 {
-	this->name = scav.name;
-	this->Hitpoints = scav.Hitpoints;
-	this->energy = scav.energy;
-	this->damage = scav.damage;
-	
+	ClapTrap::operator=(scav);
 	std::cout << Blue << "(" << name 
 	<< ") ScavTrap operator called" << std::endl << reset;
 	return (*this);

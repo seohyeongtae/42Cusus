@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:21:19 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 23:41:18 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/03 17:24:29 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(void)
 	std::cout << std::endl;
 	
 	d.whoAmI();
+	a.whoAmI();
 	
 	std::cout << std::endl;
 	return (0);
