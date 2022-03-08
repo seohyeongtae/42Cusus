@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:16:32 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/08 00:54:52 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/08 00:55:13 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ Animal::Animal(Animal const &ani)
 {
 	this->type = ani.type;
 	std::cout << "Animal Copy Constructor Called" << std::endl; 
-}
-
-void	Animal::makeSound() const
-{
-	std::cout << "Ainmal makeSound" << std::endl;
 }
 
 Animal & Animal::operator = (Animal const &ani)
