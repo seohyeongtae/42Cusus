@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 16:21:25 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/02 22:44:52 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/15 17:59:12 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ public:
 	ClapTrap(void);
 	ClapTrap(std::string name);
 	ClapTrap(ClapTrap const & clap);
-	~ClapTrap();
+	virtual ~ClapTrap();
 
 	ClapTrap &	operator=(ClapTrap const & clap);
 };
