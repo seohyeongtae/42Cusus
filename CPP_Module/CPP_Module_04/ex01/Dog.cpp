@@ -6,16 +6,15 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:30:58 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/07 23:43:28 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:42:18 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal()
+Dog::Dog() : Animal(), attribute(new Brain())
 {
 	this->type = "Dog";
-	this->attribute = new Brain();
 	std::cout << "Dog Constructor Called" << std::endl;
 }
 

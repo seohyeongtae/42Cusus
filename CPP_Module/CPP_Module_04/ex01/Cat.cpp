@@ -6,15 +6,14 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:30:58 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/07 23:43:59 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:47:27 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal()
+Cat::Cat() : Animal(), attribute(new Brain())
 {
-	this->attribute = new Brain();
 	std::cout << "Cat Constructor Called" << std::endl;
 }
 

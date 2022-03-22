@@ -6,21 +6,19 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:16:32 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/07 21:04:31 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:31:44 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal(/* args */)
+Animal::Animal() : type("")
 {
-	this->type = "";
 	std::cout << "Animal Constructor Called" << std::endl;
 }
 
-Animal::Animal(std::string name)
+Animal::Animal(std::string name) : type(name)
 {
-	this->type = name;
 	std::cout << "Animal Constructor with name Called" << std::endl;
 }
 

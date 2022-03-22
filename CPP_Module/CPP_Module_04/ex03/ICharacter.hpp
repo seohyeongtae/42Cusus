@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 02:23:46 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/08 02:26:00 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/22 18:28:41 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ICHARACTER_HPP
 
 #include "AMateria.hpp"
-
+class AMateria;
 class ICharacter
 {
 public:

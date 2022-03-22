@@ -6,21 +6,19 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:50:58 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/07 21:04:45 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/22 15:33:46 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(/* args */)
+WrongAnimal::WrongAnimal() : type("")
 {
-	this->type = "";
 	std::cout << "WrongAnimal Constructor Called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(std::string name)
+WrongAnimal::WrongAnimal(std::string name) : type(name)
 {
-	this->type = name;
 	std::cout << "WrongAnimal Constructor with name Called" << std::endl;
 }
 
