@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:06:56 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 17:00:18 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 21:59:57 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	std::string const & getName() const;
 	AMateria * getMateria(int n) const;
 	void	equip(AMateria* m);
+	void	delMateria(AMateria* dm);
 	void	unequip(int idx);
 	void	use(int idx, ICharacter & target);
 

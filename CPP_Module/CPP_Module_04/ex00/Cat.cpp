@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:30:58 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 15:47:41 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 15:36:16 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Cat::Cat() : Animal()
 {
+	this->type = "Cat";
 	std::cout << "Cat Constructor Called" << std::endl;
 }
 

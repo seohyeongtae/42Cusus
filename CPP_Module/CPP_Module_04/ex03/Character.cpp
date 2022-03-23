@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 16:38:09 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 19:01:09 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 22:40:43 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,21 @@ void	Character::equip(AMateria* m)
 	std::cout << "Character equip Fail"<< std::endl;
 }
 
+void	Character::delMateria(AMateria* dm)
+{
+	delete dm;
+	dm = NULL;
+}
+
 void	Character::unequip(int idx)
 {
 	if (idx < 4 && idx >= 0)
 	{
 		if (Materia[idx] != NULL)
 		{
+			AMateria *tempM = Materia[idx];
 			Materia[idx] = NULL;
+			delMateria(tempM);
 			std::cout << "Character unequip success" << std::endl;
 			return;
 		}
@@ -64,6 +72,8 @@ void	Character::use(int idx, ICharacter & target)
 	if (Materia[idx] != NULL)
 	{
 		Materia[idx]->use(target);
+		std::cout << "Character Use " << Materia[idx]->getType() << " To " << target.getName() << std::endl;
+		return;
 	}
 	std::cout << "Character Use Fail" << std::endl;
 }

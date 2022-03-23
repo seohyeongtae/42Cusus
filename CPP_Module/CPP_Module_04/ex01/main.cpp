@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 17:15:15 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 15:43:51 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 15:44:40 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,47 @@ int	main()
     delete k;
     delete j;
     delete i;
+    Cat *a = new Cat();
+    Cat *b = new Cat();
+    Cat *c = new Cat();
 
-    std::cout << std::endl << std::endl;
-    Animal* meta[20];
-    Dog*  tmp_dog;
-    Cat*  tmp_cat;
+    Cat *e = new Cat(*a);
+    *b = *c;
+    delete a;
+    delete b;
+    delete c;
+    delete e;
+    system("leaks Brain");
+    // std::cout << std::endl << std::endl;
+    // Animal* meta[20];
+    // Dog*  tmp_dog;
+    // Cat*  tmp_cat;
 
-    for (int a = 0 ; a < 20 ; a++) {
-        if (!(a % 2)) {
-        meta[a] = new Cat();
-        meta[a]->setType("Cat");
-        } else {
-        meta[a] = new Dog();
-        }
-    }
-    std::cout << std::endl;
-    for (int a = 0 ; a < 20 ; a++)
-    {
-        if (!(a % 2))
-        {
-            std::cout << "\033[1;33m";
-            tmp_cat = dynamic_cast<Cat *>(meta[a]);
-            std::cout << (tmp_cat->getBrain())->getIdeas(a) 
-            << "  Type = " << tmp_cat->getType()<< std::endl;
-        }
-        else 
-        {
-            std::cout << "\033[1;34m";
-            tmp_dog = dynamic_cast<Dog *>(meta[a]);
-            std::cout << (tmp_dog->getBrain())->getIdeas(a) 
-            << "  Type = " << tmp_dog->getType()<< std::endl;
-        }
-        delete meta[a];
-    }
+    // for (int a = 0 ; a < 20 ; a++) {
+    //     if (!(a % 2)) {
+    //     meta[a] = new Cat();
+    //     meta[a]->setType("Cat");
+    //     } else {
+    //     meta[a] = new Dog();
+    //     }
+    // }
+    // std::cout << std::endl;
+    // for (int a = 0 ; a < 20 ; a++)
+    // {
+    //     if (!(a % 2))
+    //     {
+    //         std::cout << "\033[1;33m";
+    //         tmp_cat = dynamic_cast<Cat *>(meta[a]);
+    //         std::cout << (tmp_cat->getBrain())->getIdeas(a) 
+    //         << "  Type = " << tmp_cat->getType()<< std::endl;
+    //     }
+    //     else 
+    //     {
+    //         std::cout << "\033[1;34m";
+    //         tmp_dog = dynamic_cast<Dog *>(meta[a]);
+    //         std::cout << (tmp_dog->getBrain())->getIdeas(a) 
+    //         << "  Type = " << tmp_dog->getType()<< std::endl;
+    //     }
+    //     delete meta[a];
+    // }
 }

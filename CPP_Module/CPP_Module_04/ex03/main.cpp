@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 17:40:01 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 18:57:48 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 22:42:58 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main()
 	AMateria* tmp0;
 	tmp0 = src1->createMateria("ice");
 	me1->equip(tmp0);
+	me1->unequip(0);
 	tmp0 = src1->createMateria("cure");
 	me1->equip(tmp0);
 
@@ -36,11 +37,12 @@ int main()
 	me1->use(0, *bob1);
 	me1->use(1, *bob1);
 
+	// system("leaks Materia");
 	delete bob1;
 	delete me1;
 	delete src1;
 	
-	std::cout << "\033[0;35m" << std::endl;
+	// std::cout << "\033[0;35m" << std::endl;
 
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
@@ -67,7 +69,7 @@ int main()
 	AMateria* tmp1 = src->createMateria("ice");
 	me->equip(tmp1);
 	AMateria* tmp2 = src->createMateria("cure");
-	me->equip(tmp);
+	me->equip(tmp2);
 
 
 	std::cout << "\033[1;33m"<< std::endl;
@@ -75,6 +77,12 @@ int main()
 	me->unequip(2);
 	me->unequip(3);
 
+	// unequip 에서 메모리 해제를 하기 때문에 다시 선언해 주서야 한다.
+	// 따라소 equip 할때 사용자가 확인을 해야 한다.
+	tmp1 = src->createMateria("ice");
+	tmp2 = src->createMateria("cure");
+
+	std::cout << "\033[0;31m" << std::endl;
 	bob->equip(tmp1);
 	bob->equip(tmp2);
 
@@ -87,6 +95,6 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-  
+	// system("leaks Materia");
 	return (0);
 }

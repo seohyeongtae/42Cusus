@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 20:50:41 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/07 21:04:51 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 15:36:31 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 WrongCat::WrongCat()
 {
+	this->type = "WrongCat";
 	std::cout << "WrongCat Constructor Called" << std::endl;
 }
 

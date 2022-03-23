@@ -6,14 +6,13 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 02:23:46 by hyseo             #+#    #+#             */
-/*   Updated: 2022/03/22 18:28:41 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/03/23 20:39:56 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
-#include "AMateria.hpp"
 class AMateria;
 class ICharacter
 {
