@@ -6,7 +6,7 @@
 #    By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/20 09:55:53 by hyseo             #+#    #+#              #
-#    Updated: 2022/04/22 19:55:13 by hyseo            ###   ########.fr        #
+#    Updated: 2022/04/22 19:55:08 by hyseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,16 @@ CFLAGS = -Wall -Werror -Wextra
 RM	= rm -rf
 
 NAME	= Bureaucrat
-HEADER 	= Bureaucrat.hpp
+HEADER 	= Bureaucrat.hpp \
+		Form.hpp	\
+		ShrubberyCreationForm.hpp	\
+		RobotomyRequestForm.hpp		\
+		PresidentialPardonForm.hpp
 OBJS	= Bureaucrat.o	\
+		Form.o 	\
+		ShrubberyCreationForm.o	\
+		RobotomyRequestForm.o	\
+		PresidentialPardonForm.o	\
 		main.o
 
 all : $(NAME)
@@ -32,7 +40,7 @@ clean :
 		$(RM) $(OBJS)
 
 fclean : clean
-		$(RM) $(NAME)
+		$(RM) $(NAME) *_shrubbery
 
 re : fclean all
 

@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 17:42:45 by hyseo             #+#    #+#             */
-/*   Updated: 2022/04/20 20:15:22 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/04/22 15:42:08 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ int main(void) {
 
   std::cout << j << std::endl
     << h << std::endl;
-  std::cout << std::endl;
+  std::cout <<  "\033[0;32m" <<  std::endl;
   b_call(j, &Bureaucrat::incrementGrade);
   b_call(h, &Bureaucrat::decrementGrade);
-  std::cout << std::endl;
+  std::cout <<  "\033[0;33m" << std::endl;
   b_make("test", 0);
   b_make("test2", 151);
   std::cout << std::endl;
   b_make("test", 70);
   b_make("test2", 70);
-  std::cout << std::endl;
+  std::cout << "\033[0;35m" <<  std::endl;
   b_call(j, &Bureaucrat::decrementGrade);
   b_call(h, &Bureaucrat::incrementGrade);
-  std::cout << std::endl;
+  std::cout << "\033[0;31m" <<  std::endl;
   b_call(j, &Bureaucrat::decrementGrade);
   b_call(h, &Bureaucrat::incrementGrade);
   return 0;

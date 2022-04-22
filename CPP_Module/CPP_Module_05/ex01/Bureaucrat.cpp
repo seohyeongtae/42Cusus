@@ -6,11 +6,12 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 17:42:36 by hyseo             #+#    #+#             */
-/*   Updated: 2022/04/22 15:40:30 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/04/22 17:27:32 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() { std::cout << "Bureaucrat Constructor Called" << std::endl; }
 
@@ -67,6 +68,17 @@ int&    Bureaucrat::decrementGrade()
     } else
         grade += 1;
     return grade;
+}
+
+void    Bureaucrat::signForm(const Form& f) const 
+{
+    try{
+        (*const_cast<Form*>(&f)).beSigned(*this);
+        std::cout << "<bureaucrat> signed <" << f.getName() << ">" << std::endl;
+    } catch(std::exception& e)
+    {
+        std::cout << "<bureaucrat> couldn’t sign <form> because <" << e.what() << ">" << std::endl;
+    }
 }
 
 const char* Bureaucrat::GradeTooHighException::what(void) const throw()
