@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:02:44 by hyseo             #+#    #+#             */
-/*   Updated: 2022/04/22 20:55:21 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/04/25 18:58:57 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,3 @@ Intern& Intern::operator=(const Intern& i) {
 
 Intern::~Intern()
 { std::cout << "Intern Destructor Called" << std::endl; };
-
-// class Intern {
-// public:
-// 	Intern();
-// 	class MatchingErrorException : public std::exception {
-// 	public:
-// 		const char* what() const throw();
-// 	};
-// 	Form* makeForm(std::string formName, std::string targetForm);
-
-// 	Intern(const Intern& i);
-// 	Intern& operator= (const Intern& i);
-// 	~Intern();
-// }
