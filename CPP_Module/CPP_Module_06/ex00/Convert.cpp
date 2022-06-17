@@ -6,7 +6,7 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:14:36 by hyseo             #+#    #+#             */
-/*   Updated: 2022/06/14 15:12:08 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/06/17 14:07:36 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Convert::Convert() : input(0) {}
 Convert::Convert(std::string& in) : input(std::atof(in.c_str()))
 {
 	// char 출력
-	if ((input >= 0 || input < 128) && !std::isinf(input))
+	if ((input >= 0 && input < 128) && !std::isinf(input))
 	{
 		if (input <= 32 || input == 127)
 			std::cout << "char: Non displayable" << std::endl;

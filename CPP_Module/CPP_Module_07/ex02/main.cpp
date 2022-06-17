@@ -6,12 +6,12 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 20:33:30 by hyseo             #+#    #+#             */
-/*   Updated: 2022/06/14 20:33:40 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/06/17 18:24:08 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -39,6 +39,7 @@ int main(int, char**)
             return 1;
         }
     }
+    
     try
     {
         numbers[-2] = 0;
@@ -47,15 +48,17 @@ int main(int, char**)
     {
         std::cerr << e.what() << '\n';
     }
+    
     try
     {
-        numbers[MAX_VAL] = 0;
+        numbers[MAX_VAL - 1] = 0;
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
+        std::cout << numbers.size() << std::endl;
     }
-
+    
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();

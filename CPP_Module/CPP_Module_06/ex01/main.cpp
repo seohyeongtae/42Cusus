@@ -6,13 +6,29 @@
 /*   By: hyseo <hyseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 13:54:31 by hyseo             #+#    #+#             */
-/*   Updated: 2022/06/14 20:24:32 by hyseo            ###   ########.fr       */
+/*   Updated: 2022/06/17 14:05:07 by hyseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include <iostream>
 
+struct Data
+{
+	std::string s1;
+	std::string s2;
+	int s3;
+};
+
+static uintptr_t serialize_ptr(Data * d)
+{
+	return(reinterpret_cast<uintptr_t>(d));
+}
+
+static Data* deserialize(uintptr_t u)
+{
+	return (reinterpret_cast<Data *>(u));
+}
 
 int main(void)
 {
